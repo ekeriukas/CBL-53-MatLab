@@ -115,8 +115,10 @@ end
 %% Plotting 
 
 %% In-cylinder pressure
+% All cycles in one plot
 f1=figure(1);
 set(f1,'Position',[ 200 800 1200 400]);             % Just a size I like. Your choice
+subplot(1,2,1)
 pp = plot(Ca,p/bara,'LineWidth',1);                 % Plots the whole matrix
 xlabel('Ca');ylabel('p [bar]');                     % Always add axis labels
 xlim([-360 360]);ylim([0 50]);                      % Matter of taste
@@ -128,6 +130,20 @@ line([CaIVC CaIVC],YLIM,'LineWidth',1,'Color','b'); % Plot a vertical line at IV
 line([CaEVO CaEVO],YLIM,'LineWidth',1,'Color','r'); % Plot a vertical line at EVO. Just for reference not a particular reason.
 set(gca,'XTick',[-360:60:360],'XGrid','on','YGrid','on');        % I like specific axis labels. Matter of taste
 title('All cycles in one plot.')
+
+% Filtered mean pressure in a separate plot
+set(f1,'Position',[ 200 800 1200 400]);             % Just a size I like. Your choice
+subplot(1,2,2)
+pp = plot(Ca,ps/bara,'LineWidth',1);                 % Plots the whole matrix
+xlabel('Ca');ylabel('p [bar]');                     % Always add axis labels
+xlim([-360 360]);ylim([0 50]);                      % Matter of taste
+iselect = 10;                                    % Plot cycle 10 again in the same plot to emphasize it. Just to show how to access individual cycles.
+YLIM = ylim;
+% Add some extras to the plot
+line([CaIVC CaIVC],YLIM,'LineWidth',1,'Color','b'); % Plot a vertical line at IVC. Just for reference not a particular reason.
+line([CaEVO CaEVO],YLIM,'LineWidth',1,'Color','r'); % Plot a vertical line at EVO. Just for reference not a particular reason.
+set(gca,'XTick',[-360:60:360],'XGrid','on','YGrid','on');        % I like specific axis labels. Matter of taste
+title('Filtered mean of all cycle pressures.')
 
 %% pV-diagram
 V = CylinderVolume(Ca(:,iselect),Cyl);

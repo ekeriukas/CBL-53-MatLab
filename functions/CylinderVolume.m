@@ -19,8 +19,7 @@ Vd      = pi*(B/2)^2*S;
 Vc      = Vd/(cr-1);
 Ap      = pi * (B/2)^2;
 % Cylinder volume as a function of crank angle (CA in degrees)
-V   = Vc + Ap .* (r .* (1 - cosd(CAl)) + l .* (1 - sqrt(1 - (r ./ l).^2 .* sind(CAl).^2)));
-
+V       = Vc + Ap.*(r+l-(r.*cosd(CAl)+sqrt(l.^2-r.^2.*sind(CAl).^2)));
 
 
 
